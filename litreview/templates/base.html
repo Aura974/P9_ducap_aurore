@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>LitReview</title>
+    </head>
+    <body>
+
+        <div>
+            <h1>LitReview</h1>
+            {% if user.is_authenticated %}
+                <p>Bonjour {{ request.user }} !
+
+                <p><a href="{% url 'home' %}">Accueil</a></p>
+                <p>Mon flux photo</a></p>              
+                <p>Suivre des abonnés</a></p>
+                <p>Changer la photo de profil</a></p>
+                <p>Changer le mot de passe</a></p>
+                <p>Se déconnecter</a></p>
+
+                </p>
+            {% endif %}
+        </div>
+        
+        <div class="main">
+            {% block content %}{% endblock content %}
+        </div>
+    
+    </body>
+</html>
