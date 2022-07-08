@@ -1,7 +1,17 @@
 {% extends "base.html" %}
+{% load feeds_extras %}
+
 {% block content %}
 
-    <h2>Bienvenue à LitReview !</h2>
+<div class="grid-container">
+    {% for instance in page_obj %}
+        {% if instance|model_type == "Ticket" %}
+            {{ ticket.title }}
+        {% elif instance|model_type == "Review"%}
+            {{ review.title }}
+        {% endif %}
+    {% endfor %}
+</div>
 
 {% endblock content %}
 
