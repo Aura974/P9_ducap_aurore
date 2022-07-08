@@ -3,12 +3,22 @@
 
 {% block content %}
 
+<button>
+    <a href="{% url 'create_review' %}">Créer une critique</a>
+</button>
+<button>
+    <a href="{% url 'create_ticket' %}">Créer un ticket</a>
+</button>
+
 <div class="grid-container">
     {% for instance in page_obj %}
         {% if instance|model_type == "Ticket" %}
-            {{ ticket.title }}
+            {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
+            <button>
+                <a href="{% url 'create_answer_review' instance.id %}">Créer une critique</a>
+            </button>
         {% elif instance|model_type == "Review"%}
-            {{ review.title }}
+            {% include "feeds/partials/review_snippet.html" with review=instance %}
         {% endif %}
     {% endfor %}
 </div>

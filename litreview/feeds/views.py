@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from feeds import forms, models
@@ -61,3 +61,21 @@ def create_review(request):
     }
     return render(request, "feeds/create_review.html", context=context)
 
+
+@login_required
+def create_answer_review(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)
+    review_form = forms.ReviewForm()
+    if request.method == "POST":
+        review_form = forms.ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.ticket = ticket
+            review.user = request.user
+            review.save()
+            return redirect("home")
+    context = {
+        "review_form": review_form,
+        "ticket": ticket
+    }
+    return render(request, "feeds/create_answer_review.html", context=context)

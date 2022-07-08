@@ -1,0 +1,13 @@
+<div class="review">
+    <p>{{ review.user }} a publié une critique</p>
+    
+    <h3>{{ review.headline }}</h3>
+    
+    <p>{{ review.body }}</p>
+    
+    <div class="review-ticket">
+        {% if review.ticket %}
+            {% include "feeds/partials/ticket_snippet.html" with ticket=review.ticket %}
+        {% endif %}
+    </div>
+</div>
