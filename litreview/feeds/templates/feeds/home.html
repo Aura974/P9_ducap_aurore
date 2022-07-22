@@ -10,15 +10,34 @@
     <a href="{% url 'create_ticket' %}">Créer un ticket</a>
 </button>
 
-<div class="grid-container">
+<div class="container">
     {% for instance in page_obj %}
         {% if instance|model_type == "Ticket" %}
-            {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
-            <button>
-                <a href="{% url 'create_answer_review' instance.id %}">Créer une critique</a>
-            </button>
+            <div class="row">
+                <div class="col-lg-6 col-8 mx-auto">
+                    <div class="card border-dark shadow-sm mt-4">
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-text">
+                                {{ instance.user }} a demandé une critique
+                            </p>
+                            {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% elif instance|model_type == "Review"%}
-            {% include "feeds/partials/review_snippet.html" with review=instance %}
+            <div class="row">
+                <div class="col-lg-6 col-8 mx-auto">
+                    <div class="card border-dark shadow-sm mt-4">
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-text">
+                                {{ instance.user }} a publié une critique
+                            </p>
+                            {% include "feeds/partials/review_snippet.html" with review=instance %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 </div>

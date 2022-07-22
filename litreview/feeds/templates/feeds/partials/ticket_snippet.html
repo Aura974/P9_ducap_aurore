@@ -1,14 +1,13 @@
-<div class="ticket">
-    <p>{{ ticket.user }} a demandé une critique</p>
-    
-    <p>{{ ticket.title }}</p>
-    
-    <p>{{ ticket.content }}</p>
-    
-    <div class="ticket-img">
-        <img src="{{ ticket.image.url }}">
-    </div>
-</div>
+<h5 class="card-title">
+    {{ ticket.title }}
+</h5>
+<p class="card-text">
+    {{ ticket.content }}
+</p>
+<img src="{{ ticket.image.url }}" class="w-50">
+
+<a href="{% url 'create_answer_review' ticket.id %}" class="btn btn-dark btn-sm align-self-end mt-4">Créer une critique</a>
+
 
 
 

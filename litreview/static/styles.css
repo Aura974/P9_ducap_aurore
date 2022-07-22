@@ -1,23 +1,4 @@
-.grid-container {
-    display: block;
-    padding: 20px;
-    text-align: center;
-}
-
-.ticket {
-    border: 1px solid black;
-    padding-bottom: 20px;
-}
-
 .ticket-img img {
     max-width: 250px;
     border-style: none;
-}
-
-.review {
-    border: 1px solid black;
-}
-
-.review-ticket {
-    padding: 20px;
 }
