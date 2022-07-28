@@ -25,6 +25,7 @@ from django.contrib.auth.views import (
 )
 import feeds.views as feeds
 import authentication.views as auth
+import followers.views as followers
 
 
 urlpatterns = [
@@ -43,7 +44,8 @@ urlpatterns = [
     path("signup/", auth.signup_page, name="signup"),
     path("create_ticket/", feeds.create_ticket, name="create_ticket"),
     path("create_review/", feeds.create_review, name="create_review"),
-    path("create_answer_review/<int:ticket_id>/", feeds.create_answer_review, name="create_answer_review")
+    path("create_answer_review/<int:ticket_id>/", feeds.create_answer_review, name="create_answer_review"),
+    path("follow_users/", followers.follow_users, name="follow_users")
 ]
 if settings.DEBUG:
     urlpatterns += static(
