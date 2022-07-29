@@ -3,13 +3,77 @@
 
 {% block content %}
 
-    <h2>Suivre d'autres utilisateurs</h2>
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-8">
+                <h5 style="text-align: center;">Suivre d'autres utilisateurs</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group mt-4">
+                        <input type="search" class="form-control rounded" name="search" style="text-align: center;" placeholder="Nom d'utilisateur" aria-label="Nom d'utilisateur"/>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <form method="post">
-            {% csrf_token %}
-            <input type="search" name="search" placeholder="username">
-            <p>{{ message }}</p>
-            <button type="submit">Envoyer</button>
-        </form>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-8">
+                <h5 style="text-align: center;">Abonnements</h5>
+                <hr>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <table class="table table-light table-hover">
+                    <tbody>
+                        {% for following in following_list %}
+                            <tr>
+                                <th class="col-md-6" style="text-align: left;" scope="row">{{ following.followed_user }}</th>
+                                <td style="text-align: right;">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ unfollows }}
+                                        <input type="hidden" name="followed_user" value="{{ following.followed_user.id }}">
+                                        <button class="btn btn-sm btn-dark" type="submit">Retirer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr><br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h5 style="text-align: center;">Abonnés</h5>
+                    <hr>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <table class="table table-light table-hover">
+                        <tbody>
+                            {% for followed_by in followed_by_list %}
+                                <tr>
+                                    <th class="col-md-6" style="text-align: left;" scope="row">{{ followed_by.user }}</th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
 {% endblock content %}

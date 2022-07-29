@@ -16,13 +16,14 @@
             <div class="row">
                 <nav class="col navbar navbar-expand-lg navbar-dark">
                     <a href="{% url 'home' %}" class="navbar-brand">
-                        LitReview
+                        <img src="{% static 'images/logo.png' %}" width="50" alt="Site Logo">
+                        LiTReview
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                         <span class="navbar-toggler-icon"></span>
                      </button>
                     <div class="collapse navbar-collapse" id="navbarContent">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
                                 <a href="{% url 'home' %}" class="nav-link">Accueil</a>
                             </li>
@@ -42,11 +43,24 @@
         </div>
     </div>
     
-    <div>
-        {% if user.is_authenticated %}
-            <p>Bonjour {{ request.user }} !</p>
-        {% endif %}
-    </div>
+    {% include "partials/messages_snippet.html" %}
+
+    
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col">
+                    {% if user.is_authenticated %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            Bonjour {{ request.user }} !
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div> -->
+    
 
     <div class="main">
         {% block content %}{% endblock content %}
