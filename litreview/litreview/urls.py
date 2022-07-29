@@ -31,6 +31,7 @@ import followers.views as followers
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", feeds.home, name="home"),
+    path("posts/", feeds.posts, name="posts"),
     path("", LoginView.as_view(
         template_name="authentication/login.html", redirect_authenticated_user=True
     ), name="login"),

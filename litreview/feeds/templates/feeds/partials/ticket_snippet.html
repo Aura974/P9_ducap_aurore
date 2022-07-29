@@ -4,9 +4,14 @@
 <p class="card-text">
     {{ ticket.content }}
 </p>
-<img src="{{ ticket.image.url }}" class="w-50">
 
-<a href="{% url 'create_answer_review' ticket.id %}" class="btn btn-dark btn-sm align-self-end mt-4">Créer une critique</a>
+{% if ticket.image %}
+    <img src="{{ ticket.image.url }}" class="w-50">
+{% endif %}
+
+{% if ticket not in reviewed_tickets %}
+    <a href="{% url 'create_answer_review' ticket.id %}" class="btn btn-dark btn-sm align-self-end mt-4">Créer une critique</a>
+{% endif %}
 
 
 

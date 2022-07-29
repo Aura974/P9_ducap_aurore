@@ -1,19 +1,28 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 from feeds import forms, models
+from followers import models as fmodels
 from itertools import chain
 
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
+    user_follows = [
+        follows.followed_user for follows in fmodels.UserFollows.objects.filter(user=request.user)
+    ]
+    user_tickets = models.Ticket.objects.filter(Q(user__in=user_follows) | Q(user=request.user))
+    user_reviews = models.Review.objects.filter(Q(user__in=user_follows) | Q(user=request.user))
     tickets_and_reviews = sorted(
-        chain(tickets, reviews),
+        chain(user_tickets, user_reviews),
         key=lambda instance: instance.time_created,
         reverse=True,
     )
+
+    reviewed_tickets = [
+        review.ticket for review in models.Review.objects.filter(user=request.user)
+    ]
 
     paginator = Paginator(tickets_and_reviews, 6)
     page_number = request.GET.get("page")
@@ -22,7 +31,7 @@ def home(request):
     return render(
         request,
         "feeds/home.html",
-        context={"page_obj": page_obj},
+        context={"page_obj": page_obj, "reviewed_tickets": reviewed_tickets},
     )
 
 
@@ -79,3 +88,24 @@ def create_answer_review(request, ticket_id):
         "ticket": ticket
     }
     return render(request, "feeds/create_answer_review.html", context=context)
+
+
+@login_required
+def posts(request):
+    tickets = models.Ticket.objects.filter(user=request.user)
+    reviews = models.Review.objects.filter(user=request.user)
+    tickets_and_reviews = sorted(
+        chain(tickets, reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True,
+    )
+
+    paginator = Paginator(tickets_and_reviews, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(
+        request,
+        "feeds/posts.html",
+        context={"page_obj": page_obj},
+    )
