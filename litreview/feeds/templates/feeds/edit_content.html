@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>Modifier</h2>
+    {% if review_ticket %}
+        {% include "feeds/partials/ticket_snippet.html" with ticket=review_ticket %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {{ edit_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Modifier</button>
+    </form>
+
+
+{% endblock content %}
+

@@ -91,6 +91,50 @@ def create_answer_review(request, ticket_id):
 
 
 @login_required
+def edit_content(request, content_type, content_id):
+    if request.method == "GET":
+        if content_type == "Ticket":
+            requested_content = models.Ticket.objects.get(pk=content_id)
+            review_ticket = None
+            edit_form = forms.TicketForm(instance=requested_content)
+
+        elif content_type == "Review":
+            requested_content = models.Review.objects.get(pk=content_id)
+            review_ticket = requested_content.ticket
+            edit_form = forms.ReviewForm(instance=requested_content)
+        context = {
+            "edit_form": edit_form,
+            "review_ticket": review_ticket
+        }
+        return render(request, "feeds/edit_content.html", context=context)
+
+    elif request.method == "POST":
+        if "edit_ticket" in request.POST:
+            ticket = models.Ticket.objects.get(pk=content_id)
+            edit_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
+            if edit_form.is_valid():
+                edit_form.save()
+            return redirect("posts")
+
+        if "edit_review" in request.POST:
+            review = models.Review.objects.get(pk=content_id)
+            edit_form = forms.ReviewForm(request.POST, request.FILES, instance=review)
+            if edit_form.is_valid():
+                edit_form.save()
+            return redirect("posts")
+
+
+def delete_post(request, content_type, content_id):
+    if content_type == "Ticket":
+        ticket = models.Ticket.objects.get(pk=content_id)
+        ticket.delete()
+    elif content_type == "Review":
+        review = models.Review.objects.get(pk=content_id)
+        review.delete()
+    return redirect("posts")
+
+
+@login_required
 def posts(request):
     tickets = models.Ticket.objects.filter(user=request.user)
     reviews = models.Review.objects.filter(user=request.user)

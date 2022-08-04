@@ -25,6 +25,7 @@ from django.contrib.auth.views import (
 )
 import feeds.views as feeds
 import authentication.views as auth
+from authentication.forms import CustomLoginForm
 import followers.views as followers
 
 
@@ -33,7 +34,9 @@ urlpatterns = [
     path("home/", feeds.home, name="home"),
     path("posts/", feeds.posts, name="posts"),
     path("", LoginView.as_view(
-        template_name="authentication/login.html", redirect_authenticated_user=True
+        template_name="authentication/login.html",
+        authentication_form=CustomLoginForm,
+        redirect_authenticated_user=True
     ), name="login"),
     path("logout/", LogoutView.as_view(next_page="login"), name="logout"),
     path("password_change/", PasswordChangeView.as_view(
@@ -46,6 +49,8 @@ urlpatterns = [
     path("create_ticket/", feeds.create_ticket, name="create_ticket"),
     path("create_review/", feeds.create_review, name="create_review"),
     path("create_answer_review/<int:ticket_id>/", feeds.create_answer_review, name="create_answer_review"),
+    path("posts/edit/<str:content_type>/<int:content_id>", feeds.edit_content, name="edit_content"),
+    path("posts/delete/<str:content_type>/<int:content_id>", feeds.delete_post, name="delete"),
     path("follow_users/", followers.follow_users, name="follow_users")
 ]
 if settings.DEBUG:

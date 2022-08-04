@@ -1,18 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>Inscription</h2>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col text-center mt-5">
+                <div align="center">
+                    <h2 class="mb-4">Inscription</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <p>
+                          <div class="form-group w-50 mb-4">
+                            {{ field }}
+                          </div>
 
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit">S'inscrire</button>
-    </form>
+                          {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                          {% endfor %}
+                        
+                        </p>
+                      {% endfor %}
+                        <button class="btn btn-primary" type="submit">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}
-

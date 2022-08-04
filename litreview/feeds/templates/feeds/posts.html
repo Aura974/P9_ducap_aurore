@@ -16,7 +16,7 @@
                             {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
                             <div class="row">
                                 <div class="col text-right mt-4">
-                                    <a href="#" class="btn btn-dark btn-sm">Modifier</a>
+                                    <a href="edit/{{ instance|model_type }}/{{ instance.id }}" class="btn btn-dark btn-sm">Modifier</a>
                                     <a href="#" class="btn btn-dark btn-sm">Supprimer</a>
                                 </div>
                             </div>
@@ -35,8 +35,8 @@
                             {% include "feeds/partials/review_snippet.html" with review=instance %}
                             <div class="row">
                                 <div class="col text-right mt-4">
-                                    <a href="#" class="btn btn-dark btn-sm">Modifier</a>
-                                    <a href="#" class="btn btn-dark btn-sm">Supprimer</a>
+                                    <a href="edit/{{ instance|model_type }}/{{ instance.id }}" class="btn btn-dark btn-sm">Modifier</a>
+                                    <a href="delete/{{ instance|model_type }}/{{ instance.id }}" class="btn btn-dark btn-sm">Supprimer</a>
                                 </div>
                             </div>
                         </div>
