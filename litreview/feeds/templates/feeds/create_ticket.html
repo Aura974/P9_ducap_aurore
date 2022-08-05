@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>Créer un ticket</h2>
-
-    <form method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Envoyer</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center mt-4">Créer un ticket</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in ticket_form.visible_fields %}
+                        <p>
+                            {{ field.label_tag }}<br>
+                            {{ field }}
+                        </p>
+                    {% endfor %}
+                    <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}
