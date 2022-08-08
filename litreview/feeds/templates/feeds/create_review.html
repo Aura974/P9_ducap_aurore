@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>Créer une critique</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center mt-4">Créer une critique</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h5>Livre/Article</h5>
+                <hr>
+                {% for field in ticket_form.visible_fields %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                    </p>
+                {% endfor %}
+                <hr>
+                <h5>Critique</h5>
+                <hr>
+                {% for field in review_form.visible_fields %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                    </p>
+                {% endfor %}
+                <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <form method="post" enctype="multipart/form-data">
-        <p>
-            Livre/Article
-            {{ ticket_form.as_p }}
-        </p>
-        <p>
-            Critique
-            {{ review_form.as_p }}
-        </p>
-        {% csrf_token %}
-        <button type="submit">Envoyer</button>
-    </form>
 
 
 {% endblock content %}

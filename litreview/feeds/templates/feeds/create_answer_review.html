@@ -1,16 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>Créer une critique</h2>
-
-    {% include "feeds/partials/ticket_snippet.html" %}
-
-    <form method="post">
-        <p>Critique</p>
-        {{ review_form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Envoyer</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center mt-4">Créer une critique</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Vous êtes en train de poster en réponse à {{ ticket.user }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <div class="card border-dark shadow-sm mt-4">
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text">
+                            {{ ticket.user }} a demandé une critique
+                        </p>
+                        {% include "feeds/partials/ticket_snippet.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            <p>Critique</p>
+            {{ review_form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
 
 
 {% endblock content %}

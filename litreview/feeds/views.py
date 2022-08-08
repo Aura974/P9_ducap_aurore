@@ -28,10 +28,20 @@ def home(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
+    ratings = []
+    for i in range(0, 5):
+        ratings.append(i)
+
+    context = {
+        "page_obj": page_obj,
+        "reviewed_tickets": reviewed_tickets,
+        "ratings": ratings,
+    }
+
     return render(
         request,
         "feeds/home.html",
-        context={"page_obj": page_obj, "reviewed_tickets": reviewed_tickets},
+        context=context,
     )
 
 

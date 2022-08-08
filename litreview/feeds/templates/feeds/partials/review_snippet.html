@@ -1,5 +1,21 @@
-<h3 class="card-title">
-    {{ review.headline }}
+{% load static %}
+{% load feeds_extras %}
+
+<h3 class="card-title d-flex align-items-center">
+    {{ review.headline }} -
+    {% with ''|center:review.rating as range %}
+        {% for _ in range %}
+            <img src="{% static 'images/gold_star.png' %}" class="pl-2">
+        {% endfor %}
+    {% endwith %}
+    {% with 5|subtract:review.rating as rest %}
+        {% with ''|center:rest as range %}
+            {% for _ in range %}
+                <img src="{% static 'images/empty_star.png' %}" class="pl-2">
+            {% endfor %}
+        {% endwith %}
+    {% endwith %}
+    
 </h3>
 <p class="card-text">
     {{ review.body }}
