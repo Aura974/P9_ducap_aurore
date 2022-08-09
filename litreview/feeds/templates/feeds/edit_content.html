@@ -21,22 +21,33 @@
                 </div>
             </div>
         </div>
+        <form method="post" enctype="multipart/form-data">
+            {{ edit_form.as_p }}
+            {% csrf_token %}
+            <div class="text-right">
+                <button class="btn btn-dark" type="submit">Envoyer</button>
+            </div>
+        </form>
     {% else %}
         <div class="row">
             <div class="col">
                 <h3 class="text-center mt-4">Modifier votre ticket</h3>
             </div>
         </div>
+        <form method="post" enctype="multipart/form-data">
+            <p>{{ edit_form.title.label }}</p>
+            <p>{{ edit_form.title }}</p>
+            <p>{{ edit_form.description.label }}</p>
+            <p>{{ edit_form.description }}</p>
+            <p>{{ edit_form.image.label }}</p>
+                <p><img src="{{ edit_form.instance.image.url }}"></p>
+            <p>{{ edit_form.image }}</p>
+            {% csrf_token %}
+            <div class="text-right">
+                <button class="btn btn-dark" type="submit">Envoyer</button>
+            </div>
+        </form>
     {% endif %}
-
-    <form method="post" enctype="multipart/form-data">
-        {{ edit_form.as_p }}
-        {% csrf_token %}
-        <div class="text-right">
-            <button class="btn btn-dark" type="submit">Envoyer</button>
-        </div>
-    </form>
-
 
 {% endblock content %}
 

@@ -4,7 +4,7 @@ from django.forms.widgets import ClearableFileInput
 
 
 class MyClearableFileInput(ClearableFileInput):
-    initial_text = "actuelle"
+    initial_text = "Image actuelle"
     input_text = "Modification"
     clear_checkbox_label = "Effacer"
 
@@ -12,12 +12,13 @@ class MyClearableFileInput(ClearableFileInput):
 class TicketForm(forms.ModelForm):
     edit_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True, required=False)
 
-    description = forms.CharField(max_length=2048, widget=forms.Textarea(attrs={"class": "form-control"}))
-    image = forms.ImageField(label="Image", required=False, widget=MyClearableFileInput)
-
     class Meta:
         model = models.Ticket
         fields = ["title", "description", "image"]
+        widgets = {
+            "description": forms.Textarea(attrs={"class": "form-control"}),
+            "image": MyClearableFileInput
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
