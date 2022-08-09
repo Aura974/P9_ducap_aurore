@@ -29,22 +29,22 @@ class TicketForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-    edit_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+    edit_review = forms.BooleanField(widget=forms.HiddenInput, initial=True, required=False)
 
     class Meta:
         model = models.Review
         fields = ["headline", "rating", "body"]
         widgets = {
-            "body": forms.Textarea(attrs={"class": "form-control"})
+            "body": forms.Textarea(attrs={"class": "form-control"}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        RATES = [(x, x) for x in range(0, 6)]
+
         self.label_suffix = ""
         self.fields["headline"].widget.attrs.update(
             {"class": "form-control", }
             )
-        self.fields["rating"].widget.attrs.update(
-            {"class": "form-control", }
-            )
+        self.fields["rating"] = forms.ChoiceField(choices=RATES, widget=forms.RadioSelect)
         self.fields["rating"].label = "Note"

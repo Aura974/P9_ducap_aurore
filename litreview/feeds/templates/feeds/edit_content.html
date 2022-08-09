@@ -22,7 +22,7 @@
             </div>
         </div>
         <form method="post" enctype="multipart/form-data">
-            {{ edit_form.as_p }}
+            {% include "feeds/partials/create_review_snippet.html" with review_form=edit_form %}
             {% csrf_token %}
             <div class="text-right">
                 <button class="btn btn-dark" type="submit">Envoyer</button>

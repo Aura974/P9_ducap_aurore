@@ -27,7 +27,7 @@
         </div>
         <form method="post">
             <p>Critique</p>
-            {{ review_form.as_p }}
+            {% include "feeds/partials/create_review_snippet.html" %}
             {% csrf_token %}
             <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
         </form>

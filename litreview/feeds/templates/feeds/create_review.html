@@ -14,7 +14,7 @@
                 <hr>
                 <h5>Critique</h5>
                 <hr>
-                    {{ review_form.as_p }}
+                    {% include "feeds/partials/create_review_snippet.html" %}
                     {% csrf_token %}
                 <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
             </form>

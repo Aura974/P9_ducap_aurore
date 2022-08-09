@@ -112,6 +112,7 @@ def edit_content(request, content_type, content_id):
             requested_content = models.Review.objects.get(pk=content_id)
             review_ticket = requested_content.ticket
             edit_form = forms.ReviewForm(instance=requested_content)
+
         context = {
             "edit_form": edit_form,
             "review_ticket": review_ticket

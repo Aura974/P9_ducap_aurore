@@ -1,0 +1,13 @@
+<p>{{ review_form.headline.label }}</p>
+<p>{{ review_form.headline }}</p>
+<p>{{ review_form.rating.label }}</p>
+<div class="mb-4 ml-4">
+    {% for radio in review_form.rating %}
+        <div class="form-check form-check-inline pr-4">
+            {{ radio }}
+        </div>
+    {% endfor %}
+</div>
+<p>{{ review_form.body.label }}</p>
+<p>{{ review_form.body }}</p>
+<p>{{ review_form.edit_review }}</p>
