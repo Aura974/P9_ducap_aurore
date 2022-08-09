@@ -9,21 +9,13 @@
                 {% csrf_token %}
                 <h5>Livre/Article</h5>
                 <hr>
-                {% for field in ticket_form.visible_fields %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                    </p>
-                {% endfor %}
+                    {{ ticket_form.as_p }}
+                    {% csrf_token %}
                 <hr>
                 <h5>Critique</h5>
                 <hr>
-                {% for field in review_form.visible_fields %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                    </p>
-                {% endfor %}
+                    {{ review_form.as_p }}
+                    {% csrf_token %}
                 <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
             </form>
         </div>

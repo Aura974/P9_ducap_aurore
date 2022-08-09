@@ -14,7 +14,7 @@ def subtract(value, arg):
 
 
 @register.simple_tag(takes_context=True)
-def get_uploader_display(context, user):
+def get_user_display(context, user):
     if user == context["user"]:
         return "Vous avez"
     return user.username + " a"

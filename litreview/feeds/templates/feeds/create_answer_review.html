@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load feeds_extras %}
 {% block content %}
 
     <div class="container">
@@ -17,7 +18,7 @@
                 <div class="card border-dark shadow-sm mt-4">
                     <div class="card-body d-flex flex-column">
                         <p class="card-text">
-                            {{ ticket.user }} a demandé une critique
+                            {% get_user_display ticket.user %} demandé une critique
                         </p>
                         {% include "feeds/partials/ticket_snippet.html" %}
                     </div>
@@ -28,7 +29,7 @@
             <p>Critique</p>
             {{ review_form.as_p }}
             {% csrf_token %}
-            <button type="submit">Envoyer</button>
+            <div class="text-right"><button class="btn btn-dark" type="submit">Envoyer</button></div>
         </form>
     </div>
 

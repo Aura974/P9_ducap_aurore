@@ -21,7 +21,7 @@
                     <div class="card border-dark shadow-sm mt-4">
                         <div class="card-body d-flex flex-column">
                             <p class="card-text">
-                                {% get_uploader_display instance.user %} demandé une critique
+                                {% get_user_display instance.user %} demandé une critique
                             </p>
                             {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
                         </div>
@@ -34,7 +34,7 @@
                     <div class="card border-dark shadow-sm mt-4">
                         <div class="card-body d-flex flex-column">
                             <p class="card-text">
-                                {% get_uploader_display instance.user %} publié une critique
+                                {% get_user_display instance.user %} publié une critique
                             </p>
                             {% include "feeds/partials/review_snippet.html" with review=instance %}
                         </div>
