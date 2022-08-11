@@ -20,8 +20,6 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
-    PasswordChangeView,
-    PasswordChangeDoneView,
 )
 import feeds.views as feeds
 import authentication.views as auth
@@ -39,12 +37,6 @@ urlpatterns = [
         redirect_authenticated_user=True
     ), name="login"),
     path("logout/", LogoutView.as_view(next_page="login"), name="logout"),
-    path("password_change/", PasswordChangeView.as_view(
-        template_name="authentication/password_change.html"
-    ), name="password-change"),
-    path("password_change_done/", PasswordChangeDoneView.as_view(
-        template_name="authentication/password_change_done.html"
-    ), name="password-change-done"),
     path("signup/", auth.signup_page, name="signup"),
     path("create_ticket/", feeds.create_ticket, name="create_ticket"),
     path("create_review/", feeds.create_review, name="create_review"),

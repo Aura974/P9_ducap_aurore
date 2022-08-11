@@ -1,47 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                {% if form.errors %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        Les identifiants et le mot de passe ne correspondent pas
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col text-center">
-                <h4 class="mb-4">Inscrivez-vous maintenant</h4>
-                <a href="{% url 'signup' %}" class="btn btn-primary">S'inscrire</a>
-            </div>
-            <div class="col-md-6 mt-5">
-                <div align="center">
-                    <h5 class="mb-4 ml-4">
-                        Connectez-vous
-                    </h5>
-                    <form method="post" class="ml-4">
-                        {% csrf_token %}
-                        {% for field in form %}
-                            <p>
-                                <div class="form-group w-75">
-                                    {{ field }}
-                                </div>
-                            </p>
-                        {% endfor %}
-                        
-                        <button type="submit" class="btn btn-primary">Se connecter</button>
-                    </form>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    Les identifiants et le mot de passe ne correspondent pas
                 </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col text-center">
+            <h4 class="mb-4">Inscrivez-vous maintenant</h4>
+            <a href="{% url 'signup' %}" class="btn btn-primary">S'inscrire</a>
+        </div>
+        <div class="col-md-6 mt-5">
+            <div align="center">
+                <h5 class="mb-4 ml-4">
+                    Connectez-vous
+                </h5>
+                <form method="post" class="ml-4">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <p>
+                            <div class="form-group w-75">
+                                {{ field }}
+                            </div>
+                        </p>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock content %}
 
