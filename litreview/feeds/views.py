@@ -14,8 +14,9 @@ def home(request):
     ]
     user_tickets = models.Ticket.objects.filter(Q(user__in=user_follows) | Q(user=request.user))
     user_reviews = models.Review.objects.filter(Q(user__in=user_follows) | Q(user=request.user))
+    answer_user_reviews = models.Review.objects.filter(Q(ticket__user=request.user) & ~Q(user=request.user))
     tickets_and_reviews = sorted(
-        chain(user_tickets, user_reviews),
+        chain(user_tickets, user_reviews, answer_user_reviews),
         key=lambda instance: instance.time_created,
         reverse=True,
     )
