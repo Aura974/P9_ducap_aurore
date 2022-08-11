@@ -13,6 +13,8 @@
                             <p class="card-text">
                                 Vous avez demandé une critique
                             </p>
+                            <small class="mt-xl-n5 mt-n3 mb-xl-4 mb-3 text-right">{{ instance.time_created|display_time }}</small>
+
                             {% include "feeds/partials/ticket_snippet.html" with ticket=instance %}
                             <div class="row">
                                 <div class="col text-right mt-4">
@@ -32,6 +34,8 @@
                             <p class="card-text">
                                 Vous avez publié une critique
                             </p>
+                            <small class="mt-xl-n5 mt-n3 mb-xl-4 mb-3 text-right">{{ instance.time_created|display_time }}</small>
+
                             {% include "feeds/partials/review_snippet.html" with review=instance %}
                             <div class="row">
                                 <div class="col text-right mt-4">
